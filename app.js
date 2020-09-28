@@ -14,6 +14,7 @@ app.use('/todos', todoRoutes)
 app.use('/', userRoutes)
 app.use(errorHandler)
 
+
 app.listen(port, ()=> {
     console.log(`listening port ${port}`)
 })
