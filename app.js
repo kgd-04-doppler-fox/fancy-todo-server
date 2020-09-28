@@ -2,9 +2,14 @@ const express = require ('express');
 const app = express ();
 const port = 4000;
 const todoRoutes = require ('./router/todo_router');
+const errorHandler = require ('./middleware/errorHandler')
 
-app.use ('/todos',todoRoutes)
+app.use (express.urlencoded({ extended:false }));
+app.use (express.json())
+
+app.use ('/todos',todoRoutes);
+app.use (errorHandler)
 
 app.listen (port,() => {
-    console.log(`Run at port:${port}`)
-})
+    console.log(`Connect to ${port}`)
+});
