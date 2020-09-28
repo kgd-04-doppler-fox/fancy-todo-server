@@ -62,12 +62,17 @@ baseurl : http://localhost:3000/
  
 * **Error Response:**
 
-  * **Code:** 400 NOT FOUND <br />
-    **Content:** `{ validation error }`
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ msg : Date can't today }`
 
   OR
 
-* **Code:** 500 INTERNAL SERVER <br />
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ msg : Invalid date }`
+
+  OR
+  
+  * **Code:** 500 INTERNAL SERVER <br />
     **Content:** `{ error : "Internal Server Error }`
 
 
@@ -148,7 +153,7 @@ baseurl : http://localhost:3000/
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "ID doesn't exist" }`
+    **Content:** `{ msg : "Error not Found" }`
 
 
 
@@ -175,20 +180,16 @@ baseurl : http://localhost:3000/
 
   * **Code:** 200 <br />
     **Content:** `{
-    "todo": {
-        "id": 2,
-        "title": "What",
-        "description": "What situations",
-        "status": false,
-        "due_date": "2020-09-29T00:00:00.000Z",
-        "updatedAt": "2020-09-28T11:23:46.857Z",
-        "createdAt": "2020-09-28T11:23:46.857Z"
-    }
+    "id": "1",
+    "title": "Pierrot",
+    "description": "Fat Detective",
+    "status": true,
+    "due_date": "2020-09-30"
 }`
  
 * **Error Response:**
 
-  * **Code:** 400 NOT FOUND <br />
+  * **Code:** 400 BAD REQUEST <br />
     **Content:** `{ validation error }`
 
   OR
@@ -223,15 +224,8 @@ baseurl : http://localhost:3000/
 
   * **Code:** 200 <br />
     **Content:** `{
-    "todo": {
-        "id": 2,
-        "title": "What",
-        "description": "What situations",
-        "status": true,
-        "due_date": "2020-09-29T00:00:00.000Z",
-        "updatedAt": "2020-09-28T11:23:46.857Z",
-        "createdAt": "2020-09-28T11:23:46.857Z"
-    }
+    "id": "1",
+    "status": "true"
 }`
  
 * **Error Response:**
@@ -337,7 +331,7 @@ baseurl : http://localhost:3000/
  
 * **Error Response:**
 
-  * **Code:** 400 Bad Request <br />
+  * **Code:** 400 BAD REQUEST <br />
     **Content:** `{ error : "Email already registered" }`
 
   OR

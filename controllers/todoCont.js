@@ -3,7 +3,9 @@ const { Todo } = require(`../models/index`)
 class TodoController {
     static async allTodos(req, res, next) {
         try {
-            const todo = await Todo.findAll()
+            const todo = await Todo.findAll({
+                order : [[`id`, `ASC`]]
+            })
             res.status(200).json({ todo })
         }
         catch(err){
@@ -32,12 +34,15 @@ class TodoController {
     }
 
     static async getById(req, res, next) {
-        const { id } = +req.params
+        const { id } = req.params
         try {
             const todo = await Todo.findByPk(
                 id
             )
-            res.status(201).json({ todo })
+            if (todo === null){
+                throw {msg :`Error not found`}
+            }
+            res.status(200).json({ todo })
         }
         catch(err){
             next (err)
@@ -47,7 +52,7 @@ class TodoController {
 
     static async putTodos(req, res, next) {
         const { title, description, status, due_date } = req.body
-        const { id } = +req.params
+        const { id } = req.params
         try {
             const todo = await Todo.update(
                 {
@@ -57,10 +62,10 @@ class TodoController {
                     due_date
                 },
                 {
-                    where : {id}
+                    where : {id: id}
                 }
             )
-            res.status(201).json({ todo })
+            res.status(200).json({ id, title, description, status, due_date })
         }
         catch(err){
             next (err)
@@ -70,17 +75,17 @@ class TodoController {
 
     static async patchTodos(req, res, next) {
         const { status } = req.body
-        const { id } = +req.params
+        const { id } = req.params
         try {
             const todo = await Todo.update(
                 {
-                    status,
+                    status
                 },
                 {
                     where : {id: id}
                 }
             )
-            res.status(201).json({ todo })
+            res.status(200).json({ id, status })
         }
         catch(err){
             next (err)
@@ -91,14 +96,14 @@ class TodoController {
     static async deleteTodos(req, res, next) {
         const { id } = req.params
         try {
-            const todo = await Todo.delete(
+            const todo = await Todo.destroy(
                 {
                     where: {
                         id : id
                     }
                 }
             )
-            res.status(201).json({ todo })
+            res.status(200).json({ msg : 'todo succes to delete' })
         }
         catch(err){
             next (err)
