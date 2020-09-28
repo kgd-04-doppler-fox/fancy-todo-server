@@ -1,5 +1,6 @@
 const express = require ('express')
 const todoRoutes = require ('./routes/todos')
+const userRoutes = require ('./routes/users')
 const errorHandler = require ('./middleware/errorHandler')
 const app = express()
 const port = 3000
@@ -10,6 +11,7 @@ app.use(express.json())
 
 
 app.use('/todos', todoRoutes)
+app.use('/', userRoutes)
 app.use(errorHandler)
 
 app.listen(port, ()=> {
