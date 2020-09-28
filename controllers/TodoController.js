@@ -1,5 +1,4 @@
 const { Todo } = require('../models')
-const { errorHandler } = require('../middlewares/errorHandler')
 
 class TodoController {
   static postAddTodo(req, res, next) {
