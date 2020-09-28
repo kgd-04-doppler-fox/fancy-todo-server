@@ -12,7 +12,9 @@ class TodoController {
                 due_date
             })
             .then(todo => {
-                res.service(200).json
+                res.status(201).json({
+                    todo
+                })
             })
             .catch(err => {
                 res.send(err)
@@ -23,7 +25,7 @@ class TodoController {
         Todo
             .findAll()
             .then(todos => {
-                res.send(todos)
+                res.status(200).json(todos)
             })
             .catch (err => {
                 res.send(err)
@@ -35,7 +37,9 @@ class TodoController {
         Todo
             .findByPk(id)
             .then(todo => {
-                res.send( todo )
+                res.status(200).json({
+                    todo
+                })
             })
             .catch ( err => {
                 res.send ( err )
@@ -44,7 +48,7 @@ class TodoController {
 
     static editTodo (req, res) {
         const {title, description, status, due_date} = req.body
-        const id = req.params.id
+        const idParams = req.params.id
         Todo    
             .update ({
                 title,
@@ -52,10 +56,11 @@ class TodoController {
                 status,
                 due_date
             },{
-                where : { id : id}
+                where : { id : idParams},
+                returning : true
             })
             .then ( todo => {
-                res.send(todo)
+                res.status(200).json(todo[1][0])
             })
             .catch (err => {
                 res.send(err)
@@ -63,21 +68,33 @@ class TodoController {
     }
 
     static changeStatusTodo (req, res) {
+        const {status} = req.body
+        const idParams = req.params.id
         Todo
-            .update( {
-
+            .update({
+                status : status
+            }, {
+                where : {id : idParams},
+                returning: true
+            })
+            .then(todo => {
+                res.status(todo[1][0])
+            })
+            .catch(err => {
+                res.send(err)
             })
     }
 
     static deleteTodo (req, res) {
+        const idParams = req.params.id
         Todo
             .destroy ({
-                where : {
-                    id : id
-                }
+                where : {id : idParams}
             })
             .then ( todo => {
-                res.send(todo)
+                res.status(200).json({
+                    "message" : `todo success to delete`
+                })
             })
             .catch (err => {
                 res.send(err)
