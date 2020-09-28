@@ -26,18 +26,23 @@ class ToDoController {
         })
     }
 
-    static getToDoById (req,res) {
+    static getToDoById (req,res,next) {
         ToDo.findByPk (+req.params.id)
         .then (data => {
-            res.status(200).json(data)
+            if (data === null){
+                throw {notFound : 'error not found'}
+            } else {
+                res.status(200).json(data)
+            }
         })
         .catch (err => {
-            res.status(500).json(err)
+            next(err)
         })
     }
 
     static updateToDoByIdPut (req,res,next) {
         console.log(req.body)
+        let dataBody = req.body
         ToDo.update ({
             title : req.body.title,
             description : req.body.description,
@@ -47,7 +52,7 @@ class ToDoController {
             id : +req.params.id
         }})
         .then (data => {
-            res.status(200).json(data)
+            res.status(200).json(req.body)
         })
         .catch (err => {
             next(err)
@@ -59,24 +64,29 @@ class ToDoController {
             id : +req.params.id
         }})
         .then (data => {
-            res.status(200).json(data)
+            res.status(200).json(req.body)
         })
         .catch (err => {
             next(err)
         })
     }
 
-    static deleteToDo (req,res) {
+    static deleteToDo (req,res,next) {
         ToDo.destroy ({
             where : {
                 id : +req.params.id
             }
         })
         .then (data => {
-            res.status(200).json({message : 'todo succes to delete'})
+            console.log(data)
+            if (data === 0){
+                throw {notFound : 'error not found'}
+            } else {
+                res.status(200).json({message : 'todo succes to delete'})
+            }
         })
         .catch (err => {
-            res.status(500).json(err)
+            next(err)
         })
     }
 }

@@ -100,7 +100,13 @@ baseurl : 'http://localhost:3000'
     "updatedAt": "2020-09-28T09:53:26.846Z"
 }`
 
-**Updat ToDos By Id Using PUT**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "User doesn't exist" }`
+
+
+
+**Update ToDos By Id Using PUT**
 ----
   update ToDo by id from DB and return updated ToDo json data.
 
@@ -125,14 +131,24 @@ baseurl : 'http://localhost:3000'
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `[
-    1
-]`
+    **Content:** `{
+    "title": "handle PUT 2",
+    "description": "handle PUT request on postman",
+    "status": false,
+    "due_date": "2020-08-27"
+}`
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
     **Content:** `{ msg : "Tanggal tidak boleh lewat hari ini" }`
+        
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "User doesn't exist" }`
+
+
 
 **Update ToDos By Id Using PATCH**
 ----
@@ -159,11 +175,51 @@ baseurl : 'http://localhost:3000'
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `[
-    1
-]`
+    **Content:** `{
+    "status": true
+}`
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
     **Content:** `{ msg : "Tanggal tidak boleh lewat hari ini" }`
+    
+    OR
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "User doesn't exist" }`
+
+
+**Delete Todo**
+----
+  Delete ToDo from DB
+
+* **URL**
+
+  /users/:id
+
+* **Method:**
+
+  `DELETE`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `id=[integer]`
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{
+    "message": "todo succes to delete"
+}`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ error : "User doesn't exist" }`
