@@ -1,0 +1,25 @@
+{
+  "name": "fancy-todo-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhimashary/fancy-todo-server.git"
+  },
+  "keywords": [],
+  "author": "dhimashary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhimashary/fancy-todo-server/issues"
+  },
+  "homepage": "https://github.com/dhimashary/fancy-todo-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "sequelize": "^6.3.5"
+  }
+}
