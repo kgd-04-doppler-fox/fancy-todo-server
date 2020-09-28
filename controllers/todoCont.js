@@ -1,32 +1,34 @@
 const { Todo } = require(`../models/index`)
 
 class TodoController {
-    static allTodo(req, res, next) {
-        Todo.findAll()
-            .then(todo => {
-                res.status(200).json({todo})
-            })
-            .catch(err => {
-                next(err)
-            })
+    static async allTodo(req, res, next) {
+        try {
+            const todo = await Todo.findAll()
+            res.status(200).json({ todo })
+        }
+        catch(err){
+            next(err)
+        }
+            
     }
 
-    static addTodo(req, res, next) {
-        const {title, description, status, due_date} = req.body
-        Todo.create(
-            { 
-                title,
-                description,
-                status, 
-                due_date
-            }
-        )
-            .then(todo => {
-                res.status(201).json({todo})
-            })
-            .catch(err => {
-                next(err)
-            })
+    static async addTodo(req, res, next) {
+        const { title, description, status, due_date } = req.body
+        try {
+            const todo = await Todo.create(
+                {
+                    title,
+                    description,
+                    status,
+                    due_date
+                }
+            )
+            res.status(201).json({ todo })
+        }
+        catch(err){
+            next (err)
+        }
+        
     }
 }
 
