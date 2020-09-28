@@ -5,6 +5,6 @@ const Controller = require (`../controllers/controller`)
 
 router.get(`/`, Controller.home)
 router.use(`/todos`, todo)
-router.use(`/user`, user)
+router.use(`/users`, user)
 
 module.exports = router
