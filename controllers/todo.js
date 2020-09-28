@@ -48,7 +48,7 @@ class TodoController {
         }, {
             where : { id : optionId},
             returning : true
-        }).then ( todo => {
+        }).then (todo => {
             if (!todo) {
                 res.status(404).json({error : `ERROR 404 Not Found`})
             }
