@@ -7,7 +7,7 @@ baseurl : 'http://localhost:3000'
 
 * **URL**
 
-  /todos/
+  /todos
 
 * **Method:**
 

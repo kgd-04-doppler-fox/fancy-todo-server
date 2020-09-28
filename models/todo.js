@@ -31,5 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'ToDo',
   });
+
   return ToDo;
 };

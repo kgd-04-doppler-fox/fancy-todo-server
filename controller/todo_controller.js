@@ -52,7 +52,11 @@ class ToDoController {
             id : +req.params.id
         }})
         .then (data => {
-            res.status(200).json(req.body)
+            if (data[0] === 0){
+                throw {notFound : 'error not found'}
+            } else {
+                res.status(200).json(req.body)
+            }
         })
         .catch (err => {
             next(err)
@@ -64,7 +68,11 @@ class ToDoController {
             id : +req.params.id
         }})
         .then (data => {
-            res.status(200).json(req.body)
+            if (data[0] === 0){
+                throw {notFound : 'error not found'}
+            } else {
+                res.status(200).json(req.body)
+            }
         })
         .catch (err => {
             next(err)
