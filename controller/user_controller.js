@@ -1,5 +1,6 @@
-const { User } = require ('../models')
-const bcryptjs = require ('bcryptjs')
+const { User } = require ('../models');
+const bcryptjs = require ('bcryptjs');
+const jwt = require ('jsonwebtoken');
 
 class UserController {
     static async register (req,res,next) {
@@ -33,8 +34,12 @@ class UserController {
             }
             const validPassword = bcryptjs.compareSync(password, user.password)
             if (validPassword) {
-                res.status(201).json ({
-                    access_token: 'fake token'
+                const access_token = jwt.sign({
+                    email : user.email,
+                    id : user.id
+                }, process.env.JWT_SECRET)
+                res.status (200).json({
+                    access_token
                 })
             } else {
                 throw {
