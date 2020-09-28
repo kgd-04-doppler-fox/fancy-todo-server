@@ -17,7 +17,16 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     status: DataTypes.STRING,
-    due_date: DataTypes.STRING
+    due_date: {
+      type: DataTypes.DATE,
+      validate: {
+        isValid (value){
+          if (value < new Date()){
+            throw new Error (`tanggal tidak valid`)
+          }
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Todo',

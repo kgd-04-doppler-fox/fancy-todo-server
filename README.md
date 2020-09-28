@@ -27,6 +27,12 @@ http://localhost:3000/
     }
  
 * **Error Response:**
+     **Code:** 400 BAD REQUEST <br />
+    **Content:** `{"msg": "tanggal tidak valid"}`
+
+    OR
+
+    **Code:** 500 INTERNAL SERVER ERROR <br />
 
 
 
@@ -65,6 +71,7 @@ http://localhost:3000/
     ]
  
 * **Error Response:**
+    **Code:** 500 INTERNAL SERVER ERROR <br />
 
 
 
@@ -93,7 +100,12 @@ http://localhost:3000/
         }
     }
 * **Error Response:**
+     **Code:** 404 NOT FOUND <br />
+    **Content:** `{"error": "not found"}`
 
+    OR
+
+    **Code:** 500 INTERNAL SERVER ERROR <br />
 
 
 **Title**
@@ -119,6 +131,18 @@ http://localhost:3000/
         "updatedAt": "2020-09-28T10:02:21.627Z"
     }
 * **Error Response:**
+     **Code:** 404 NOT FOUND <br />
+    **Content:** `{"error": "not found"}`
+
+    OR
+
+     **Code:** 400 BAD REQUEST <br />
+    **Content:** `{"msg": "tanggal tidak valid"}`
+
+    OR
+
+    **Code:** 500 INTERNAL SERVER ERROR <br />
+
 
 
 
@@ -146,6 +170,12 @@ http://localhost:3000/
         "updatedAt": "2020-09-28T10:02:21.627Z"
     }
 * **Error Response:**
+     **Code:** 404 NOT FOUND <br />
+    **Content:** `{"error": "not found"}`
+
+    OR
+    
+    **Code:** 500 INTERNAL SERVER ERROR <br />
 
 
 
@@ -163,5 +193,11 @@ http://localhost:3000/
 
 * **Success Response:**
      { "message" : `todo success to delete` }
-     
+
 * **Error Response:**
+     **Code:** 404 NOT FOUND <br />
+    **Content:** `{"error": "not found"}`
+
+    OR
+    
+    **Code:** 500 INTERNAL SERVER ERROR <br />

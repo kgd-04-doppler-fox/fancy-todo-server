@@ -2,22 +2,20 @@ const { Todo } = require ('../models')
 
 
 class TodoController {
-    static createTodo (req, res) {
+    static createTodo (req, res, next) {
         const {title, description, status, due_date} = req.body
         Todo   
             .create({
                 title,
                 description,
                 status,
-                due_date
+                due_date : new Date (due_date)
             })
             .then(todo => {
-                res.status(201).json({
-                    todo
-                })
+                res.status(201).json({todo})
             })
             .catch(err => {
-                res.send(err)
+                next(err)
             })
     }
 
@@ -32,21 +30,22 @@ class TodoController {
             })
     }
 
-    static findById (req, res) {
+    static findById (req, res, next) {
         const id = req.params.id
         Todo
             .findByPk(id)
             .then(todo => {
-                res.status(200).json({
-                    todo
-                })
+               if (!todo){
+                   res.status(404).json({error : `not found`})
+               }
+               res.status(200).json({todo})
             })
             .catch ( err => {
-                res.send ( err )
+                next(err)
             })
     }
 
-    static editTodo (req, res) {
+    static editTodo (req, res, next) {
         const {title, description, status, due_date} = req.body
         const idParams = req.params.id
         Todo    
@@ -54,16 +53,20 @@ class TodoController {
                 title,
                 description,
                 status,
-                due_date
+                due_date : new Date (due_date)
             },{
                 where : { id : idParams},
                 returning : true
             })
             .then ( todo => {
+                if (!todo){
+                    res.status(404).json({error : `not found`})
+                }
+
                 res.status(200).json(todo[1][0])
             })
             .catch (err => {
-                res.send(err)
+                next(err)
             })
     }
 
@@ -78,6 +81,9 @@ class TodoController {
                 returning: true
             })
             .then(todo => {
+                if (!todo){
+                    res.status(404).json({error : `not found`})
+                }
                 res.status(todo[1][0])
             })
             .catch(err => {

@@ -1,5 +1,6 @@
 const express = require ('express')
 const todoRoutes = require ('./routes/todos')
+const errorHandler = require ('./middleware/errorHandler')
 const app = express()
 const port = 3000
 
@@ -7,7 +8,9 @@ const port = 3000
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
+
 app.use('/todos', todoRoutes)
+app.use(errorHandler)
 
 app.listen(port, ()=> {
     console.log(`listening port ${port}`)
