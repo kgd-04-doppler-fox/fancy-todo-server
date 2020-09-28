@@ -1,14 +1,17 @@
+require('dotenv').config()
 const express = require('express')
-const routes = require('./routes/todos.js')
+const todoRoutes = require('./routes/todos.js')
+const userRoutes = require('./routes/users')
 const { errorHandler } = require('./middlewares/errorHandler.js')
 
-const port = 3000
+const port = process.env.PORT
 const app = express()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.use('/todos', routes)
+app.use('/', userRoutes)
+app.use('/todos', todoRoutes)
 app.use(errorHandler)
 
 app.listen(port, () => {

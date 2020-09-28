@@ -1,6 +1,6 @@
-const TodoController = require('../controllers/TodoController')
-
 const router = require('express').Router()
+
+const TodoController = require('../controllers/TodoController')
 
 router.post('/', TodoController.postAddTodo)
 router.get('/', TodoController.showAllTodo)
