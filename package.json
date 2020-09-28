@@ -1,0 +1,31 @@
+{
+  "name": "fancy-todo-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreadityaaa/fancy-todo-server.git"
+  },
+  "keywords": [],
+  "author": "andreaditya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreadityaaa/fancy-todo-server/issues"
+  },
+  "homepage": "https://github.com/andreadityaaa/fancy-todo-server#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "pg": "^8.3.3",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0"
+  }
+}
