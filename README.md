@@ -293,7 +293,9 @@ baseurl : http://localhost:3000/
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{ "Login": "Login Sucessful!" }`
+    **Content:** `{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImV0ZXJuYWwucHV0cmFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTYwMTMwODEyM30.NkqvrEea2sqiQ07qFBShNvqSLo0qFx7hYiTYrSmd42k"
+  }`
  
 * **Error Response:**
 
@@ -327,12 +329,17 @@ baseurl : http://localhost:3000/
 * **Success Response:**
 
   * **Code:** 201 <br />
-    **Content:** `{ email : eternal.putra@gmail.com, password : "secret" }`
+    **Content:** `{
+    "id": 6,
+    "email": "something.putra@gmail.com"
+  }`
  
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ error : "Email already registered" }`
+    **Content:** `{
+    "msg": "Key (email)=([@email.com]) already exists."
+  }`
 
   OR
 

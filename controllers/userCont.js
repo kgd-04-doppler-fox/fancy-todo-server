@@ -1,5 +1,7 @@
 const { User } = require(`../models/index`)
 const bcryptjs = require(`bcryptjs`)
+const jwt = require(`jsonwebtoken`)
+
 
 class UserController {
     static async login(req, res, next) {
@@ -15,13 +17,13 @@ class UserController {
                     name: `Wrong email/password`
                 }
             }
-            const validPassword = bcryptjs.comparedSync(password, user.password) //compare body with hash bcryptjs
+            const validPassword = bcryptjs.compareSync(password, user.password) //compare body with hash bcryptjs
 
             if (validPassword) {
                 const access_token = jwt.sign({
                     email: user.email,
                     id: user.id
-                }, process.onv.JWT_SECRET)
+                }, process.env.JWT_SECRET)
                 
                 res.status(200).json({
                     access_token
@@ -46,7 +48,8 @@ class UserController {
                     password
                 }
             )
-            res.status(201).json({ user })
+            res.status(201).json({ id : user.id,
+            email : user.email })
         }
         catch (err) {
             next(err)
