@@ -32,12 +32,10 @@ class TodoController {
     }
 
     static async getById(req, res, next) {
-        const { id } = req.params
+        const { id } = +req.params
         try {
-            const todo = await Todo.findByPK(
-                {
-                    id
-                }
+            const todo = await Todo.findByPk(
+                id
             )
             res.status(201).json({ todo })
         }
@@ -49,7 +47,7 @@ class TodoController {
 
     static async putTodos(req, res, next) {
         const { title, description, status, due_date } = req.body
-        const { id } = req.params
+        const { id } = +req.params
         try {
             const todo = await Todo.update(
                 {
@@ -72,14 +70,14 @@ class TodoController {
 
     static async patchTodos(req, res, next) {
         const { status } = req.body
-        const { id } = req.params
+        const { id } = +req.params
         try {
             const todo = await Todo.update(
                 {
                     status,
                 },
                 {
-                    where : {id}
+                    where : {id: id}
                 }
             )
             res.status(201).json({ todo })
@@ -107,7 +105,6 @@ class TodoController {
         }
         
     }
-
 
 }
 
