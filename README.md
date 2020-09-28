@@ -231,7 +231,7 @@ baseurl : http://localhost:3000/
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ validation error }`
+    **Content:** `{ msg : `[Title/Description/Status/Due_date] cannot be [Empty/Null]` }`
 
   OR
 
