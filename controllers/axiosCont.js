@@ -7,7 +7,7 @@ class RepoController {
             method: `POST`,
             url: `https://api.github.com/user/repos`,
             data : {
-                name : req.body
+                name : req.body.name
             },
             headers: {
                 Accept: ``,

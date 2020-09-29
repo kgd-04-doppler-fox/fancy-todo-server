@@ -38,7 +38,7 @@ class TodoController {
 
     static async getById(req, res, next) {
         const { id } = req.params
-        try { //findAll Todo then findOne Todo the datafrom before (not yet complete)
+        try { 
             const todo = await Todo.findOne(
                 {
                     where: {
