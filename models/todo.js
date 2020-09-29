@@ -10,13 +10,37 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      ToDo.belongsTo(models.User,{
+        foreignKey : "userId",
+        targetKey : "id"
+      })
     }
   };
   ToDo.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    status: DataTypes.BOOLEAN,
+    title: {
+      type : DataTypes.STRING,
+      allowNull : false,
+      validate : {
+        notEmpty : true,
+        notNull : true
+      }
+    },
+    description: {
+      type : DataTypes.STRING,
+      allowNull : false,
+      validate : {
+        notEmpty : true,
+        notNull : true
+      }
+    },
+    status: {
+      type : DataTypes.BOOLEAN,
+      allowNull : false,
+      validate : {
+        notEmpty : true,
+        notNull : true
+      }
+    },
     due_date: {
       type : DataTypes.DATE,
       validate : {
@@ -26,7 +50,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
-    }
+    },
+    userId: DataTypes.INTEGER 
   }, {
     sequelize,
     modelName: 'ToDo',

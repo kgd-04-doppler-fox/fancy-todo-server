@@ -5,6 +5,8 @@ function errorHandler (err, req, res, next) {
         res.status(400).json({msg: "Email already use"})
     } else if (err.notFound === "error not found"){
         res.status(404).json({ error : "Error Not Found" })
+    } else if (err.name = "unauthorized access") {
+        res.status(401).json({msg:err.name})
     } else {
         res.status(500).json(err)
     }
