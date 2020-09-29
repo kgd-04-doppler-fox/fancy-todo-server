@@ -12,14 +12,55 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      Todo.belongsTo(models.User)
     }
   };
   Todo.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    status: DataTypes.BOOLEAN,
+    title: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notNull:{
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notNull:{
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notNull:{
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
     due_date: {
       type: DataTypes.DATE,
+      allowNull:false,
       validate: {
         isToday(value){
           if (value < new Date()){
@@ -27,7 +68,21 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
-      
+    },
+
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notNull:{
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
     }
   }, {
     sequelize,

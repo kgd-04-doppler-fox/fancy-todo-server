@@ -9,7 +9,8 @@ class TodoController{
                title,
                description,
                status,
-               due_date
+               due_date,
+             UserId: req.decodedUser.id
            })
            res.status(201).json({todos})
        } catch (err) {
@@ -20,7 +21,11 @@ class TodoController{
 
     static async findAll(req, res, next){
         try{
-            const todos = await Todo.findAll()
+            const todos = await Todo.findAll({
+                where: {
+                    UserId: req.decodedUser.id
+                }
+            })
             if (todos.length < 0){
                 throw{
                     name: "not found"
@@ -58,7 +63,8 @@ class TodoController{
                 title,
                 description,
                 status,
-                due_date
+                due_date,
+                UserId: req.decodedUser.id
             },{
                 returning: true,
                 where: {id}
