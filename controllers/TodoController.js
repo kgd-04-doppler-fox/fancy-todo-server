@@ -99,7 +99,7 @@ class TodoController {
           msg: 'Todo not found!'
         }
       } else {
-        res.status(200).json({ message: 'Todo has been deleted.' })
+        res.status(200).json({ msg: 'Todo has been deleted.' })
       }
     } catch (err) {
       next(err)
