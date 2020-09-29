@@ -12,17 +12,70 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      Todo.belongsTo(models.User)
     }
   };
   Todo.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    status: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'cannot be empty'
+        }
+      }
+    },
     due_date: {
       type: DataTypes.DATE,
-      validate:{
-        isDate:true,
-        isAfter:`${new Date()}`
+      allowNull: false,
+      validate: {
+        isDate: true,
+        isToday(date) {
+          if (date.getTime() < new Date().getTime()) {
+            throw new Error(`Date must be after today`)
+          }
+        },
+        notNull: {
+          args: true,
+          msg: 'cannot be empty'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'cannot be empty'
+        }
       }
     }
   }, {
