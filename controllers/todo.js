@@ -49,7 +49,7 @@ class TodoController {
             where : { id : optionId},
             returning : true
         }).then (todo => {
-            if (!todo) {
+            if (todo[0] === 0) {
                 res.status(404).json({error : `ERROR 404 Not Found`})
             }
             res.status(200).json(todo[1][0])
@@ -80,7 +80,10 @@ class TodoController {
         const optionId = req.params.id
         Todo.destroy ({
             where : {id : optionId}
-        }).then ( todo => {
+        }).then (todo => {
+            if (!todo) {
+                res.status(404).json({error : `ERROR 404 Not Found`})
+            }
             res.status(200).json({
                 "message" : `Todo Successfully Deleted`
             })
