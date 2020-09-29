@@ -1,17 +1,23 @@
 const axios = require(`axios`)
+const fs = require(`fs`)
+const file = require (`../todos.json`)
 
 class AxiosController {
     static feature(req,res,next){
         console.log(req.query)
         axios({
             method: `GET`,
-            url: `https://developers.zomato.com/api/v2.1/search?q=` + req.query.food,
+            url: `https://api.prexview.com/v1/transform`,
             headers: {
-                "user-key": process.env.ZOMATO_KEY 
+                Authorization: process.env.PREXVIEW_KEY 
+            },
+            body: {
+                json : file,
+                template : `template-name`,
+                output : 'pdf'
             }
         })
         .then(response=>{
-            console.log(response)
             res.status(response.status).json(response.data)
         })
         .catch(err=>{
