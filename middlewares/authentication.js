@@ -7,7 +7,6 @@ function authentication(req, res, next) {
   if (decoded) {
     User.findByPk(decoded.id)
       .then(user => {
-        console.log(user)
         if (user) {
           req.decodedUser = decoded
           next()

@@ -217,3 +217,41 @@
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
     **Content:** `{ "message": "Validation isAfter on due_date failed"}`
+
+**Random Todo**
+----
+  you can randomize todo if you get bored  
+
+* **URL**
+
+  /randomtodo
+
+* **Method:**
+
+  `POST`
+
+
+* **Success Response:**
+
+  * **Code:** 201 <br />
+    **Content:** `{
+    "id": 8,
+    "title": "recreational",
+    "description": "Binge watch a trending series",
+    "status": false,
+    "due_date": "2020-09-30T19:53:13.478Z",
+    "UserId": 2,
+    "updatedAt": "2020-09-29T19:53:13.479Z",
+    "createdAt": "2020-09-29T19:53:13.479Z"
+}`
+    
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{ message : "data not found" }`
+
+  OR
+
+  * **Code:** 500 INTERNAL SERVER ERROR <br />
+    **Content:** `{ "message": "Validation isAfter on due_date failed"}`
