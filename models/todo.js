@@ -30,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    UserId : DataTypes.INTEGER
+    UserId : DataTypes.INTEGER,
+    Snack : DataTypes.STRING
 }, {
     sequelize,
     modelName: 'Todo',
