@@ -33,12 +33,12 @@ class UserController {
             }
             const validPassword = bcryptjs.compareSync(password, user.password)
             if (validPassword) {
-                const accessToken = jwt.sign({
+                const access_token = jwt.sign({
                     email : user.email,
                     id : user.id,
                 }, process.env.JWT_SECRET)
                 res.status(200).json({
-                    accessToken
+                    access_token
                 })
             } else {
                 throw {

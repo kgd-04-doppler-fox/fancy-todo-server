@@ -7,7 +7,8 @@ class TodoController {
             title,
             description,
             status,
-            due_date : new Date (due_date)
+            due_date : new Date (due_date),
+            UserId: req.decodedUser.id
         }).then(todo => {
             res.status(201).json({ todo })
         }).catch(err => {
@@ -16,8 +17,11 @@ class TodoController {
     }
 
     static showAllTodo (req, res) {
-        Todo.findAll()
-        .then(todos => {
+        Todo.findAll({
+            where: {
+                UserId: req.decodedUser.id
+            }
+        }).then(todos => {
             res.status(200).json(todos)
         }).catch (err => {
             res.send(err)
