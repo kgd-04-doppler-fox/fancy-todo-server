@@ -3,7 +3,11 @@ const { Todo } = require('../models')
 
 class TodoController {
     static findAll (req, res, next) {
-        Todo.findAll()
+        Todo.findAll({
+            where : {
+                UserId : req.decodedUser.id
+            }
+        })
         .then(data => {
             res.status(200).json(data)
         })
@@ -109,7 +113,7 @@ class TodoController {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             if(data === 1){
                 res.status(200).json({message: 'todo success to delete'})
             } else {
