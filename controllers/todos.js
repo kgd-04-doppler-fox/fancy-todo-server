@@ -1,24 +1,29 @@
 const { Todo } = require ('../models')
-
+const axios = require ('axios')
 
 class TodoController {
     static createTodo (req, res, next) {
         const {title, description, status, due_date} = req.body
-        Todo   
-            .create({
-                title,
-                description,
-                status,
-                due_date : new Date (due_date),
-                UserId: Number(req.decodedUser.id)
-
-            })
-            .then(todo => {
-                res.status(201).json({todo})
-            })
-            .catch(err => {
-                next(err)
-            })
+        axios ({
+            method : 'GET',
+            url : `https://api.geodatasource.com/city?key=${process.env.geodata_key}&format=json&lat=${req.query.lat}&lng=${req.query.lng}`
+        })
+        .then(response => {
+            return Todo.create({
+                    title,
+                    description,
+                    status,
+                    due_date : new Date (due_date),
+                    UserId: Number(req.decodedUser.id),
+                    location: response.data.city
+                })
+        })
+        .then(todo => {
+            res.status(200).json(todo)
+        })
+        .catch(err => {
+            next(err)
+        })
     }
 
     static findAll (req, res){

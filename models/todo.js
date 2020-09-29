@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    location: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Todo',
