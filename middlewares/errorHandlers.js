@@ -19,7 +19,7 @@ function errorHandlers(err, req, res, next) {
             msg: err.name
         })
     }
-    else if (err.name === `unauthorized`) {
+    else if (err.name === `Unauthorized`) {
         res.status(401).json({
             msg: err.name
         })

@@ -15,19 +15,19 @@ function authentication(req, res, next) {
                 }
                 else {
                     throw {
-                        name: `unauthorized`
+                        name: `Unauthorized`
                     }
                 }
             })
             .catch(err => {
                 next({
-                    name: `unauthorized`
+                    name: `Unauthorized`
                 })
             })
     }
     else {
         next({
-            name: `unauthorized`
+            name: `Unauthorized`
         })
     }
 }

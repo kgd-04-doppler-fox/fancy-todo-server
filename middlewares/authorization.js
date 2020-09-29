@@ -15,7 +15,7 @@ function authorization(req, res, next) {
                     next()
                 }
                 else {
-                    throw { name: `unauthorized` }
+                    throw { name: `Unauthorized` }
                 }
             }
         })
