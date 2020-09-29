@@ -1,17 +1,13 @@
 const axios = require(`axios`)
 
-class RepoController {
-    static createRepo(req,res,next){
-
+class AxiosController {
+    static feature(req,res,next){
+        console.log(req.query)
         axios({
-            method: `POST`,
-            url: `https://api.github.com/user/repos`,
-            data : {
-                name : req.body.name
-            },
+            method: `GET`,
+            url: `https://developers.zomato.com/api/v2.1/search?q=` + req.query.food,
             headers: {
-                Accept: ``,
-                Authorization : ``
+                "user-key": process.env.ZOMATO_KEY 
             }
         })
         .then(response=>{
@@ -24,4 +20,4 @@ class RepoController {
     }
 }
 
-module.exports = RepoController
+module.exports = AxiosController
