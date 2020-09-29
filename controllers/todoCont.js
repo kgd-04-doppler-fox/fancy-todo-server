@@ -4,14 +4,14 @@ class TodoController {
     static async allTodos(req, res, next) {
         try {
             const todo = await Todo.findAll({
-                order : [[`id`, `ASC`]]
+                order: [[`id`, `ASC`]]
             })
             res.status(200).json({ todo })
         }
-        catch(err){
+        catch (err) {
             next(err)
         }
-            
+
     }
 
     static async addTodos(req, res, next) {
@@ -27,10 +27,10 @@ class TodoController {
             )
             res.status(201).json({ todo })
         }
-        catch(err){
-            next (err)
+        catch (err) {
+            next(err)
         }
-        
+
     }
 
     static async getById(req, res, next) {
@@ -39,15 +39,15 @@ class TodoController {
             const todo = await Todo.findByPk(
                 id
             )
-            if (todo === null){
-                throw {msg :`Error not found`}
+            if (todo === null) {
+                throw { name: `Error not found` } //handle to errorhandle
             }
             res.status(200).json({ todo })
         }
-        catch(err){
-            next (err)
+        catch (err) {
+            next(err)
         }
-        
+
     }
 
     static async putTodos(req, res, next) {
@@ -62,15 +62,20 @@ class TodoController {
                     due_date
                 },
                 {
-                    where : {id: id}
+                    where: { id: id },
+                    returning: true
                 }
             )
-            res.status(200).json({ id, title, description, status, due_date })
+            if (todo[0] === 0) {
+                throw { name: `Error not found` }
+            } else {
+                res.status(200).json({ id, title, description, status, due_date })
+            }
         }
-        catch(err){
-            next (err)
+        catch (err) {
+            next(err)
         }
-        
+
     }
 
     static async patchTodos(req, res, next) {
@@ -82,15 +87,21 @@ class TodoController {
                     status
                 },
                 {
-                    where : {id: id}
+                    where: { id: id },
+                    returning: true
                 }
             )
-            res.status(200).json({ id, status })
+            console.log(todo) //need to be fixed by todos and also put on top
+            if (todo[0] === 0) {
+                throw { name: `Error not found` }
+            } else {
+                res.status(200).json({ id, status })
+            }
         }
-        catch(err){
-            next (err)
+        catch (err) {
+            next(err)
         }
-        
+
     }
 
     static async deleteTodos(req, res, next) {
@@ -99,16 +110,20 @@ class TodoController {
             const todo = await Todo.destroy(
                 {
                     where: {
-                        id : id
+                        id: id
                     }
                 }
             )
-            res.status(200).json({ msg : 'todo succes to delete' })
+            if (todo === 0) {
+                throw { name: `Error not found` }
+            } else {
+                res.status(200).json({ msg: 'todo succes to delete' })
+            }
         }
-        catch(err){
-            next (err)
+        catch (err) {
+            next(err)
         }
-        
+
     }
 
 }
