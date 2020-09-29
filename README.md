@@ -1,7 +1,7 @@
 # Fancy To-Do Server
 
 ## Table of Contents
----
+
 * [About the Project](#about-the-project)
 * [Todo](#todo)
   * Show All Todo
@@ -20,20 +20,21 @@
   
 
 ## About the Project
----
+
 A todo app with fancy features:
 
 * Registering an account for your personalised to-do
 * Digital clock
 * Daily weather forecast
 
+---
 
 ## Todo
 
 API documentation for the Todo
 
 ### Show All Todo
----
+
   Returns a json data of all Todo of an authenticated user.
 
 * **URL**
@@ -94,8 +95,10 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
-### Show a Todo by Id
 ---
+
+### Show a Todo by Id
+
   Returns a single json data about a todo selected by `req.params.id`.
 
 * **URL**
@@ -151,8 +154,10 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
-### Add a new Todo
 ---
+
+### Add a new Todo
+
   Create a new Todo
 
 * **URL**
@@ -209,9 +214,10 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
 
 ### Edit a Todo by Id
----
+
   Edit each data of a Todo selected by `req.params.id`.
 
 * **URL**
@@ -275,9 +281,10 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
 
 ### Edit a Todo's status by Id
----
+
   Edit the status of a Todo selected by `req.params.id`.
 
 * **URL**
@@ -331,10 +338,10 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
-
+---
 
 ### Delete a Todo by Id
----
+
   Delete a Todo selected by `req.params.id`
 
 * **URL**
@@ -372,13 +379,15 @@ API documentation for the Todo
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
+
 
 ## User
 
 API documentation for the User.
 
 ### Register
----
+
   Register a new account for the application
 
 * **URL**
@@ -441,9 +450,9 @@ API documentation for the User.
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
 
 ### Login
----
 
   Login to a registered user.
 
@@ -546,11 +555,11 @@ API documentation for the User.
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
 
 ## Weather Forecast
 
 ### Show Today's Weather by City
----
 
 * **URL**
 
@@ -593,9 +602,10 @@ API documentation for the User.
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
+---
 
 ### Digital clock
----
+
 * **URL**
 
   /weather
