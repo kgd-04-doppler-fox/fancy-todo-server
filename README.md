@@ -146,9 +146,7 @@ API documentation for the Todo
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** <br />
-    
-    `{ "todo": "Todo with such id is not found." }`
+    **Content:** `{ "todo": "Todo with such id is not found." }`
 
   OR
 
@@ -206,9 +204,7 @@ API documentation for the Todo
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{"msg": "Date must be after today"}`
+    **Content:** `{"msg": "Date must be after today"}`
 
   OR
 
@@ -266,16 +262,12 @@ API documentation for the Todo
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Date must be after today" }`
+    **Content:** `{ "msg": "Date must be after today" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** <br />
-    
-    `{ "msg": "Todo not found!" }`
+    **Content:** `{ "msg": "Todo not found!" }`
 
   OR 
 
@@ -330,9 +322,7 @@ API documentation for the Todo
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** <br />
-    
-    `{ "msg": "Todo not found!" }`
+    **Content:** `{ "msg": "Todo not found!" }`
 
   OR 
 
@@ -371,9 +361,7 @@ API documentation for the Todo
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** <br />
-    
-    `{ "msg": "Todo has been deleted." }`
+    **Content:** `{ "msg": "Todo has been deleted." }`
  
 * **Error Response:**
 
@@ -421,30 +409,22 @@ API documentation for the User.
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Email must be type of email." }`
+    **Content:** `{ "msg": "Email must be type of email." }`
 
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Email cannot be empty" }`
+    **Content:** `{ "msg": "Email cannot be empty" }`
 
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Email has been taken." }`
+    **Content:** `{ "msg": "Email has been taken." }`
 
   OR
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Password cannot be empty" }`
+    **Content:** `{ "msg": "Password cannot be empty" }`
 
   OR 
 
@@ -492,9 +472,7 @@ API documentation for the User.
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Wrong email or password." }`
+    **Content:** `{ "msg": "Wrong email or password." }`
 
   OR
 
@@ -540,16 +518,12 @@ API documentation for the User.
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST <br />
-    **Content:** <br />
-    
-    `{ "msg": "Date must be after today" }`
+    **Content:** `{ "msg": "Date must be after today" }`
 
   OR
 
   * **Code:** 404 NOT FOUND <br />
-    **Content:** <br />
-    
-    `{ "msg": "Todo not found!" }`
+    **Content:** `{ "msg": "Todo not found!" }`
 
   OR 
 
@@ -579,7 +553,7 @@ API documentation for the User.
 
    **Required:**
  
-    `[access_key]=string`
+    `[access_key]=string` <br/>
     `[query]=string`
 
 *  **Headers**
@@ -595,7 +569,7 @@ API documentation for the User.
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** <br />
+    **Content:**
     `{ "weather": "Partly cloudy" }`
  
 * **Error Response:**
@@ -624,7 +598,7 @@ API documentation for the User.
 
    **Required:**
  
-    `[access_key]=string`
+    `[access_key]=string` <br/>
     `[query]=string`
 
 *  **Headers**
@@ -640,7 +614,7 @@ API documentation for the User.
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** <br />
+    **Content:**
     `{ "time": "17:45" }`
  
 * **Error Response:**
