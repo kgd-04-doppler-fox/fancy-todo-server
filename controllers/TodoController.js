@@ -3,7 +3,10 @@ const { Todo } = require('../models')
 class TodoController {
   static postAddTodo(req, res, next) {
     const { title, description, status, due_date } = req.body
-    Todo.create({ title, description, status, due_date })
+    Todo.create({
+      title, description, status, due_date,
+      UserId: req.decodedUser.id
+    })
       .then(todo => {
         res.status(201).json({ todo })
       })
@@ -12,8 +15,12 @@ class TodoController {
       })
   }
 
-  static showAllTodo(req, res) {
-    Todo.findAll()
+  static showAllTodo(req, res, next) {
+    Todo.findAll({
+      where: {
+        UserId: req.decodedUser.id
+      }
+    })
       .then(todo => {
         res.status(200).json({ todo })
       })
@@ -45,9 +52,16 @@ class TodoController {
         {
           where: {
             id: +req.params.id
-          }
+          },
+          returning: true
         })
-      res.status(201).json({ title, description, status, due_date })
+      if (updated[0] === 0) {
+        throw {
+          msg: 'Todo not found!'
+        }
+      } else {
+        res.status(201).json(updated[1][0])
+      }
     } catch (err) {
       next(err)
     }
@@ -59,9 +73,16 @@ class TodoController {
       const updated = await Todo.update({ status }, {
         where: {
           id: +req.params.id
-        }
+        },
+        returning: true
       })
-      res.status(201).json({ status })
+      if (updated[0] === 0) {
+        throw {
+          msg: 'Todo not found!'
+        }
+      } else {
+        res.status(201).json(updated[1][0])
+      }
     } catch (err) {
       next(err)
     }
@@ -70,9 +91,16 @@ class TodoController {
   static async deleteTodoById(req, res, next) {
     try {
       const deleted = await Todo.destroy({
-        where: { id: +req.params.id }
+        where: { id: +req.params.id },
+        returning: true
       })
-      res.status(200).json({ message: 'Data has been deleted.' })
+      if (deleted[0] === 0) {
+        throw {
+          msg: 'Todo not found!'
+        }
+      } else {
+        res.status(200).json({ message: 'Todo has been deleted.' })
+      }
     } catch (err) {
       next(err)
     }
