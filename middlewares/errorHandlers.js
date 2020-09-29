@@ -22,7 +22,7 @@ function errorHandlers(err, req, res, next) {
     else {
         res.status(500).json({
             msg : `Internal Server Error`,
-            err
+            err : err
         })
     }
 }

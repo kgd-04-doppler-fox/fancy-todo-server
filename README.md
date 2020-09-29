@@ -148,7 +148,7 @@ baseurl : http://localhost:3000/
             "createdAt": "2020-09-28T10:12:52.690Z",
             "updatedAt": "2020-09-28T10:12:52.690Z"
         }
-}`
+    }`
  
 * **Error Response:**
 
@@ -179,13 +179,15 @@ baseurl : http://localhost:3000/
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{
-    "id": "1",
-    "title": "Pierrot",
-    "description": "Fat Detective",
+    **Content:** '{
+    "id": 1,
+    "title": "Jackass",
+    "description": "Fatass Detective",
     "status": true,
-    "due_date": "2020-09-30"
-}`
+    "due_date": "2020-10-29T00:00:00.000Z",
+    "createdAt": "2020-09-28T11:15:24.967Z",
+    "updatedAt": "2020-09-29T05:02:15.676Z"
+    }'
  
 * **Error Response:**
 
@@ -223,10 +225,15 @@ baseurl : http://localhost:3000/
 * **Success Response:**
 
   * **Code:** 200 <br />
-    **Content:** `{
-    "id": "1",
-    "status": "true"
-}`
+    **Content:** '{
+    "id": 1,
+    "title": "Jackass",
+    "description": "Fatass Detective",
+    "status": true,
+    "due_date": "2020-10-29T00:00:00.000Z",
+    "createdAt": "2020-09-28T11:15:24.967Z",
+    "updatedAt": "2020-09-29T05:02:15.676Z"
+    }'
  
 * **Error Response:**
 

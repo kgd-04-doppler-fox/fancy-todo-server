@@ -4,6 +4,7 @@ class TodoController {
     static async allTodos(req, res, next) {
         try {
             const todo = await Todo.findAll({
+                where: { UserId: +req.decodedUser.id },
                 order: [[`id`, `ASC`]]
             })
             res.status(200).json({ todo })
@@ -16,13 +17,15 @@ class TodoController {
 
     static async addTodos(req, res, next) {
         const { title, description, status, due_date } = req.body
+
         try {
             const todo = await Todo.create(
                 {
                     title,
                     description,
                     status,
-                    due_date
+                    due_date,
+                    UserId: +req.decodedUser.id
                 }
             )
             res.status(201).json({ todo })
@@ -35,9 +38,14 @@ class TodoController {
 
     static async getById(req, res, next) {
         const { id } = req.params
-        try {
-            const todo = await Todo.findByPk(
-                id
+        try { //findAll Todo then findOne Todo the datafrom before (not yet complete)
+            const todo = await Todo.findOne(
+                {
+                    where: {
+                        UserId: +req.decodedUser.id,
+                        id: id
+                    }
+                }
             )
             if (todo === null) {
                 throw { name: `Error not found` } //handle to errorhandle
@@ -62,14 +70,17 @@ class TodoController {
                     due_date
                 },
                 {
-                    where: { id: id },
+                    where: {
+                        UserId: +req.decodedUser.id,
+                        id: id
+                    },
                     returning: true
                 }
             )
             if (todo[0] === 0) {
                 throw { name: `Error not found` }
             } else {
-                res.status(200).json({ id, title, description, status, due_date })
+                res.status(200).json(todo[1][0])
             }
         }
         catch (err) {
@@ -87,15 +98,17 @@ class TodoController {
                     status
                 },
                 {
-                    where: { id: id },
+                    where: { UserId: +req.decodedUser.id,
+                    id : id
+                    },
                     returning: true
                 }
             )
-            console.log(todo) //need to be fixed by todos and also put on top
+
             if (todo[0] === 0) {
                 throw { name: `Error not found` }
             } else {
-                res.status(200).json({ id, status })
+                res.status(200).json(todo[1][0])
             }
         }
         catch (err) {
@@ -110,7 +123,8 @@ class TodoController {
             const todo = await Todo.destroy(
                 {
                     where: {
-                        id: id
+                        UserId: +req.decodedUser.id,
+                        id : id
                     }
                 }
             )
