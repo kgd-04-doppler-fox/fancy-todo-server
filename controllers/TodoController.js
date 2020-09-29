@@ -34,7 +34,7 @@ class TodoController {
       const todo = await Todo.findByPk(+req.params.id)
       if (todo === null) {
         throw {
-          todo: 'Todo with such id is not found.'
+          msg: 'Todo not found!'
         }
       }
       res.status(200).json({ todo })

@@ -23,7 +23,7 @@ class UserController {
       })
       if (user === null) {
         throw {
-          msg: 'Email has not been registered yet.'
+          msg: 'Wrong email or password.'
         }
       }
       const validate = bcrypt.compareSync(password, user.password)
