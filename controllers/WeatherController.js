@@ -4,7 +4,7 @@ class WeatherController {
   static getWeatherByCity(req, res, next) {
     const params = {
       access_key: process.env.WEATHER_STACK,
-      query: 'Paris'
+      query: req.query.query
     }
 
     axios.get('http://api.weatherstack.com/forecast', { params })
@@ -21,7 +21,7 @@ class WeatherController {
   static getLocalTime(req, res, next) {
     const params = {
       access_key: process.env.WEATHER_STACK,
-      query: 'Paris'
+      query: req.query.query
     }
 
     axios.get('http://api.weatherstack.com/forecast', { params })
