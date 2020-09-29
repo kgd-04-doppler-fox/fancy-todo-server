@@ -9,7 +9,9 @@ class TodoController {
                 title,
                 description,
                 status,
-                due_date : new Date (due_date)
+                due_date : new Date (due_date),
+                UserId: Number(req.decodedUser.id)
+
             })
             .then(todo => {
                 res.status(201).json({todo})
@@ -21,7 +23,11 @@ class TodoController {
 
     static findAll (req, res){
         Todo
-            .findAll()
+            .findAll({
+                where : {
+                    UserId : req.decodedUser.id
+                }
+            })
             .then(todos => {
                 res.status(200).json(todos)
             })
@@ -59,7 +65,7 @@ class TodoController {
                 returning : true
             })
             .then ( todo => {
-                if (!todo){
+                if (todo[0] === 0){
                     res.status(404).json({error : `not found`})
                 }
 
@@ -82,9 +88,13 @@ class TodoController {
             })
             .then(todo => {
                 if (!todo){
-                    res.status(404).json({error : `not found`})
+                    throw {
+                        name : `error not found`
+                    }
                 }
-                res.status(todo[1][0])
+                res.status(200).json({
+                    book : todo[1][0]
+                })
             })
             .catch(err => {
                 res.send(err)

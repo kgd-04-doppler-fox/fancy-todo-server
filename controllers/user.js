@@ -42,7 +42,7 @@ class UserController {
                     const accessToken = jwt.sign({
                         email : user.email,
                         id : user.id,
-                    }, `secret`)
+                    }, process.env.JWT_SECRET)
                      
                     res.status(200).json ({
                         accessToken
