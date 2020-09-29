@@ -7,10 +7,9 @@ router.use(authentication)
 router.get(`/`, TodoController.allTodos)
 router.post(`/`, TodoController.addTodos)
 
+router.use(`/:id`,authorization)
 router.get(`/:id`, TodoController.getById)
-
-// router.use(authorization)
-router.patch(`/:id`,authorization,TodoController.patchTodos)
+router.patch(`/:id`,TodoController.patchTodos)
 router.put(`/:id`, TodoController.putTodos)
 router.delete(`/:id`, TodoController.deleteTodos)
 

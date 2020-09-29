@@ -19,6 +19,11 @@ function errorHandlers(err, req, res, next) {
             msg: err.name
         })
     }
+    else if (err.name === `unauthorized`) {
+        res.status(401).json({
+            msg: err.name
+        })
+    }
     else {
         res.status(500).json({
             msg : `Internal Server Error`,
