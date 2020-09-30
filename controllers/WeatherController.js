@@ -1,13 +1,18 @@
 const axios = require('axios')
+const { User } = require('../models')
 
 class WeatherController {
   static getWeatherByCity(req, res, next) {
     const params = {
       access_key: process.env.WEATHER_STACK,
-      query: req.query.query
     }
 
-    axios.get('http://api.weatherstack.com/forecast', { params })
+    let city
+    User.findOne({ where: { id: req.decodedUser.id } })
+      .then(user => {
+        city = user.city
+        return axios.get(`http://api.weatherstack.com/forecast?query=${city}`, { params })
+      })
       .then(response => {
         const apiResponse = response.data;
         res.status(response.status).json({

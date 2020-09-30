@@ -4,10 +4,10 @@ const jwt = require('jsonwebtoken')
 
 class UserController {
   static async register(req, res, next) {
-    const { email, password } = req.body
+    const { email, password, city } = req.body
     try {
       const user = await User.create({
-        email, password
+        email, password, city
       })
       res.status(201).json({ id: user.id, email })
     } catch (err) {

@@ -396,6 +396,7 @@ API documentation for the User.
 
     `email=[string]`
     `password=[string]`
+    `city=[string]`
 
 * **Success Response:**
 
@@ -427,6 +428,11 @@ API documentation for the User.
     **Content:** `{ "msg": "Password cannot be empty" }`
 
   OR 
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `{ "msg": "City cannot be empty" }`
+
+  OR
 
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
