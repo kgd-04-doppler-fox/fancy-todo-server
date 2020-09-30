@@ -3,22 +3,25 @@ const axios = require ('axios')
 
 class TodoController {
     static createTodo (req, res, next) {
-        const {title, description, status, due_date} = req.body
-        axios ({
-            method : 'GET',
-            url : `https://api.geodatasource.com/city?key=${process.env.geodata_key}&format=json&lat=${req.query.lat}&lng=${req.query.lng}`
-        })
-        .then(response => {
-            return Todo.create({
+        // console.log(req.body)
+        const {title, description, status, due_date, location} = req.body
+        // axios ({
+        //     method : 'GET',
+        //     url : `https://api.geodatasource.com/city?key=${process.env.geodata_key}&format=json&lat=${req.query.lat}&lng=${req.query.lng}`
+        // })
+        // .then(response => {
+        //     return 
+        Todo.create({
                     title,
                     description,
                     status,
                     due_date : new Date (due_date),
                     UserId: Number(req.decodedUser.id),
-                    location: response.data.city
+                    location: location
                 })
-        })
+        // })
         .then(todo => {
+            console.log(todo)
             res.status(200).json(todo)
         })
         .catch(err => {
@@ -34,7 +37,9 @@ class TodoController {
                 }
             })
             .then(todos => {
-                res.status(200).json(todos)
+                res.status(200).json({
+                    todos
+                })
             })
             .catch (err => {
                 res.send(err)
@@ -57,14 +62,17 @@ class TodoController {
     }
 
     static editTodo (req, res, next) {
-        const {title, description, status, due_date} = req.body
+        // console.log(req.params.id)
+        console.log(req.body)
+        const {title, description, status, due_date, location} = req.body
         const idParams = req.params.id
         Todo    
             .update ({
                 title,
                 description,
                 status,
-                due_date : new Date (due_date)
+                due_date : new Date (due_date),
+                location: location
             },{
                 where : { id : idParams},
                 returning : true

@@ -2,8 +2,10 @@ const {User} = require ('../models')
 const bcryptjs = require ('bcryptjs')
 const jwt = require ('jsonwebtoken')
 
+
 class UserController {
     static register(req, res, next){
+        console.log(req.body)
         const { email, password, fullName } = req.body 
         User
             .create({
@@ -43,7 +45,6 @@ class UserController {
                         email : user.email,
                         id : user.id,
                     }, process.env.JWT_SECRET)
-                     
                     res.status(200).json ({
                         accessToken
                     })
