@@ -17,7 +17,8 @@ class WeatherController {
         const apiResponse = response.data;
         res.status(response.status).json({
           weather: apiResponse.current.weather_descriptions[0],
-          temperature: apiResponse.current.temperature
+          temperature: apiResponse.current.temperature,
+          city
         })
         console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
       })
@@ -32,11 +33,16 @@ class WeatherController {
       query: req.query.query
     }
 
-    axios.get('http://api.weatherstack.com/forecast', { params })
+    let city
+    User.findOne({ where: { id: req.decodedUser.id } })
+      .then(user => {
+        city = user.city
+        return axios.get(`http://api.weatherstack.com/forecast?query=${city}`, { params })
+      })
       .then(response => {
         const apiResponse = response.data;
         let time = apiResponse.location.localtime.split(' ')[1]
-        res.status(response.status).json({ time })
+        res.status(response.status).json({ time, city })
       })
       .catch(error => {
         next(error)

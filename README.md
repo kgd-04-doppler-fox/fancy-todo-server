@@ -559,7 +559,7 @@ API documentation for the User.
 
    **Required:**
  
-    `[query]=string`
+    None
 
 *  **Headers**
 
@@ -576,7 +576,8 @@ API documentation for the User.
   * **Code:** 200 <br />
     **Content:**
     `{ "weather": "Partly cloudy",
-        "temperature": 19
+        "temperature": 19,
+        "city": "Berlin"
      }`
  
 * **Error Response:**
@@ -589,7 +590,7 @@ API documentation for the User.
 
 * **URL**
 
-  /weather
+  /clock
 
 * **Method:**
 
@@ -605,7 +606,7 @@ API documentation for the User.
 
    **Required:**
  
-    `[query]=string`
+    None
 
 *  **Headers**
 
@@ -621,7 +622,8 @@ API documentation for the User.
 
   * **Code:** 200 <br />
     **Content:**
-    `{ "time": "17:45" }`
+    `{ "time": "17:45",
+      "city": "Berlin" }`
  
 * **Error Response:**
 
