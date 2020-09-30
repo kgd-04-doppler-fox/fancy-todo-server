@@ -4,7 +4,7 @@ const file = require(`../todos.json`)
 
 class AxiosController {
     static feature(req, res, next) {
-        
+
         axios({
             method: `GET`,
             url: `https://www.boredapi.com/api/activity/`

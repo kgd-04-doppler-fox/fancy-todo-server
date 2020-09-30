@@ -1,5 +1,5 @@
 const { Todo } = require(`../models/index`)
-const fs = require(`fs`)
+// const fs = require(`fs`)
 
 class TodoController {
     static async allTodos(req, res, next) {
@@ -29,13 +29,13 @@ class TodoController {
                     UserId: +req.decodedUser.id
                 }
             )
-            TodoController.save(todo, (err) => {//save function to api
-                if (err) {
-                    next(err)
-                } else {
-                    res.status(200).json({ msg: 'todo succes to create and convert' })
-                }
-            })
+            // TodoController.save(todo, (err) => {//save function to api
+            //     if (err) {
+            //         next(err)
+            //     } else {
+            //         res.status(200).json({ msg: 'todo succes to create and convert' })
+            //     }
+            // })
             res.status(201).json({ todo })
         }
         catch (err) {
@@ -150,15 +150,15 @@ class TodoController {
     }
 
 
-    static save(input, callback) {
-        fs.writeFile(`todos.json`, JSON.stringify(input, null, 2), "utf8", (err) => {
-            if (err) {
-                next(err)
-            } else {
-                console.log(`Success making json`)
-            }
-        })
-    }
+    // static save(input, callback) {
+    //     fs.writeFile(`todos.json`, JSON.stringify(input, null, 2), "utf8", (err) => {
+    //         if (err) {
+    //             next(err)
+    //         } else {
+    //             console.log(`Success making json`)
+    //         }
+    //     })
+    // }
 
 }
 
