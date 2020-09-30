@@ -29,7 +29,7 @@ class TodoController {
                     UserId: +req.decodedUser.id
                 }
             )
-            TodoController.save(todo, (err) => {
+            TodoController.save(todo, (err) => {//save function to api
                 if (err) {
                     next(err)
                 } else {
@@ -151,7 +151,7 @@ class TodoController {
 
 
     static save(input, callback) {
-        fs.writeFile(`.todos.json`, JSON.stringify(input, null, 2), "utf8", (err) => {
+        fs.writeFile(`todos.json`, JSON.stringify(input, null, 2), "utf8", (err) => {
             if (err) {
                 next(err)
             } else {
