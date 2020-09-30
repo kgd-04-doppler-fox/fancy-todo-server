@@ -553,7 +553,6 @@ API documentation for the User.
 
    **Required:**
  
-    `[access_key]=string` <br/>
     `[query]=string`
 
 *  **Headers**
@@ -570,7 +569,9 @@ API documentation for the User.
 
   * **Code:** 200 <br />
     **Content:**
-    `{ "weather": "Partly cloudy" }`
+    `{ "weather": "Partly cloudy",
+        "temperature": 19
+     }`
  
 * **Error Response:**
 
@@ -598,7 +599,6 @@ API documentation for the User.
 
    **Required:**
  
-    `[access_key]=string` <br/>
     `[query]=string`
 
 *  **Headers**

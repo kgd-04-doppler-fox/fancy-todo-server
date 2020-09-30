@@ -10,7 +10,10 @@ class WeatherController {
     axios.get('http://api.weatherstack.com/forecast', { params })
       .then(response => {
         const apiResponse = response.data;
-        res.status(response.status).json({ weather: response.data.current.weather_descriptions[0] })
+        res.status(response.status).json({
+          weather: apiResponse.current.weather_descriptions[0],
+          temperature: apiResponse.current.temperature
+        })
         console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
       })
       .catch(error => {
