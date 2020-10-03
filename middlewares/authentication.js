@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const {User} = require('../models')
 
 function authentication(req, res, next){
-
     const decoded = jwt.verify(req.headers.access_token, process.env.JWT_SECRET)
     
     if (decoded){
@@ -14,7 +13,7 @@ function authentication(req, res, next){
             }
             else{
                 throw{
-                    name: 'invalide access'
+                    name: 'invalid access'
                 }
             }
         })
@@ -22,7 +21,7 @@ function authentication(req, res, next){
             next(err)
         })
     }else{
-        next({name: 'invalide access'})
+        next({name: 'invalid access'})
     }
 }
 

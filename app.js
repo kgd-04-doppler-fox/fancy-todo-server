@@ -6,9 +6,11 @@ const todoRouter = require('./routes/todo-router')
 const userRouter = require('./routes/user-router')
 const errorHandler = require('./middlewares/errorHandler')
 const thirdPartyRouter = require('./routes/thirdParty')
+const cors = require('cors')
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+app.use(cors())
 
 app.use(thirdPartyRouter)
 app.use(userRouter)

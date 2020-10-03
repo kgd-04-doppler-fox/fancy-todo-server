@@ -36,7 +36,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true
+        notNull: true,
+        len: {
+          args: [6,32],
+          msg: "String length is not in this range"
+            }
       }
     } 
   }, {
