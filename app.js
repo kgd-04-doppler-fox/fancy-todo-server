@@ -6,7 +6,6 @@ const errorHandler = require ('./middleware/errorHandler')
 const cors = require('cors')
 const app = express()
 const port = 3000
-const locaiton = require ('./controllers/api')
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())

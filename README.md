@@ -201,3 +201,59 @@ http://localhost:3000/
     OR
     
     **Code:** 500 INTERNAL SERVER ERROR <br />
+
+
+
+**Title**
+----
+    Login
+
+* **URL**
+
+    /login
+
+* **Method:**
+  
+    `POST`
+
+* **Success Response:**
+     { "id" : `user id`,
+       "fullName" : `user name`,
+       "email" : `user email`,
+     }
+
+* **Error Response:**
+     **Code:** 400 NOT FOUND <br />
+    **Content:** `{"error": "wrong email/password"}`
+
+    OR
+    
+    **Code:** 500 INTERNAL SERVER ERROR <br />
+
+
+
+**Title**
+----
+    Registration User
+
+* **URL**
+
+    /register
+
+* **Method:**
+  
+    `POST`
+
+* **Success Response:**
+     { "id" : `user id`,
+       "fullName" : `user name`,
+       "email" : `user email`
+     }
+
+* **Error Response:**
+     **Code:** 400 BAD REQUEST <br />
+    **Content:** `{"error": "email must be uniq"}`
+
+    OR
+    
+    **Code:** 500 INTERNAL SERVER ERROR <br />
