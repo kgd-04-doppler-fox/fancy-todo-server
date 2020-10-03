@@ -12,8 +12,6 @@ app.use(express.json())
 app.use(cors())
 
 
-
-
 app.use('/todos', todoRoutes)
 app.use('/', userRoutes)
 app.use(errorHandler)

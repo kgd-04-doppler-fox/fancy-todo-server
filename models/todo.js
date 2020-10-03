@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
   
     static associate(models) {
-      // define association here
+     Todo.belongsToMany(models.User, {through:"TodoUser"})
     }
   };
   Todo.init({
