@@ -3,25 +3,27 @@ const axios = require ('axios')
 
 class TodoController {
     static createTodo (req, res, next) {
-        // console.log(req.body)
-        const {title, description, status, due_date, location} = req.body
-        // axios ({
-        //     method : 'GET',
-        //     url : `https://api.geodatasource.com/city?key=${process.env.geodata_key}&format=json&lat=${req.query.lat}&lng=${req.query.lng}`
-        // })
-        // .then(response => {
-        //     return 
-        Todo.create({
-                    title,
-                    description,
-                    status,
-                    due_date : new Date (due_date),
-                    UserId: Number(req.decodedUser.id),
-                    location: location
-                })
-        // })
+        const {title, description, due_date, location} = req.body
+        axios ({
+            method : 'GET',
+            url : "https://developers.zomato.com/api/v2.1/locations?query=" + location,
+            headers : {
+                "user-key": process.env.zomato
+            }
+        })
+        .then(response => {
+            const loc = response.data.location_suggestions[0]
+            return Todo
+            .create({
+                title,
+                description,
+                status : `uncompleted`,
+                due_date : new Date (due_date),
+                UserId: Number(req.decodedUser.id),
+                location: `${loc.title}, ${loc.country_name}`
+            })
+        })
         .then(todo => {
-            console.log(todo)
             res.status(200).json(todo)
         })
         .catch(err => {
