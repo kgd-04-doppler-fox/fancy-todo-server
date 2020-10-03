@@ -1,5 +1,7 @@
 # fancy-todo-server
 
+Docs : https://www.getpostman.com/collections/938f6ebf19540d21ae77
+
 baseurl : http://localhost:3000/
 
 **Home**
