@@ -41,20 +41,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Password cannot be empty'
         }
       }
-    },
-    city: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: {
-          args: true,
-          msg: 'City cannot be empty'
-        },
-        notEmpty: {
-          args: true,
-          msg: 'City cannot be empty'
-        }
-      }
     }
   }, {
     sequelize,

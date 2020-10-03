@@ -1,6 +1,6 @@
 const { Todo } = require('../models')
 
-exports.authorization = (req, res, next) => {
+function authorization(req, res, next) {
   Todo.findByPk(+req.params.id)
     .then(todo => {
       if (todo === null) {
@@ -19,3 +19,5 @@ exports.authorization = (req, res, next) => {
       next(err)
     })
 }
+
+module.exports = authorization

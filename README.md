@@ -14,9 +14,8 @@
   * Register
   * Login
   * Access Token
-* [Weather Forecast](#weather-forecast)
-  * Show Today's Weather by City
-  * Digital clock
+* [Quote of the day](#quote-of-the-day)
+  * Generate random motivational quote
   
 
 ## About the Project
@@ -24,8 +23,8 @@
 A todo app with fancy features:
 
 * Registering an account for your personalised to-do
-* Digital clock
-* Daily weather forecast
+* Add a new Todo, update, or delete it
+* Generate motivational quotes
 
 ---
 
@@ -113,7 +112,7 @@ API documentation for the Todo
 
    **Required:**
  
-   `id=[integer]`
+   `[id]=integer`
 
 *  **Headers**
 
@@ -228,7 +227,7 @@ API documentation for the Todo
 
    **Required:**
  
-    `id=[integer]`
+    `[id]=integer`
 
 *  **Headers**
 
@@ -239,10 +238,10 @@ API documentation for the Todo
 
 * **Data Params**
 
-    `title=[string]`
-    `description=[string]`
-    `status=[boolean]`
-    `due_date=[date]`
+    `[title]=string` <br />
+    `[description]=string` <br />
+    `[status]=boolean` <br />
+    `[due_date]=date` <br />
 
 * **Success Response:**
 
@@ -291,7 +290,7 @@ API documentation for the Todo
 
    **Required:**
  
-    `id=[integer]`
+    `[id]=integer`
 
 *  **Headers**
 
@@ -302,7 +301,7 @@ API documentation for the Todo
 
 * **Data Params**
 
-    `status=[boolean]`
+    `[status]=boolean`
 
 * **Success Response:**
 
@@ -346,7 +345,7 @@ API documentation for the Todo
 
    **Required:**
  
-    `id=[integer]`
+    `[id]=integer`
 
 *  **Headers**
 
@@ -394,9 +393,8 @@ API documentation for the User.
 
 * **Data Params**
 
-    `email=[string]`
-    `password=[string]`
-    `city=[string]`
+    `[email]=string`
+    `[password]=string`
 
 * **Success Response:**
 
@@ -429,11 +427,6 @@ API documentation for the User.
 
   OR 
 
-  * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ "msg": "City cannot be empty" }`
-
-  OR
-
   * **Code:** 500 INTERNAL SERVER ERROR <br />
 
 ---
@@ -464,8 +457,8 @@ API documentation for the User.
 
 * **Data Params**
 
-    `email=[string]`
-    `password=[string]`
+    `[email]=string`
+    `[password]=string`
 
 * **Success Response:**
 
@@ -497,14 +490,14 @@ API documentation for the User.
 
    **Required:**
  
-    `id=[integer]`
+    `[id]=integer`
 
 * **Data Params**
 
-    `title=[string]`
-    `description=[string]`
-    `status=[boolean]`
-    `due_date=[date]`
+    `[title]=string`
+    `[description]=string`
+    `[status]=boolean`
+    `[due_date]=date`
 
 * **Success Response:**
 
@@ -537,13 +530,13 @@ API documentation for the User.
 
 ---
 
-## Weather Forecast
+## Quote of the day
 
-### Show Today's Weather by City
+### Generate random motivational quote
 
 * **URL**
 
-  /weather
+  /quote
 
 * **Method:**
 
@@ -575,55 +568,11 @@ API documentation for the User.
 
   * **Code:** 200 <br />
     **Content:**
-    `{ "weather": "Partly cloudy",
-        "temperature": 19,
-        "city": "Berlin"
-     }`
- 
-* **Error Response:**
-
-  * **Code:** 500 INTERNAL SERVER ERROR <br />
-
----
-
-### Digital clock
-
-* **URL**
-
-  /clock
-
-* **Method:**
-
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
- 
-    None
-
-*  **URL Query**
-
-   **Required:**
- 
-    None
-
-*  **Headers**
-
-   **Required:**
- 
-    access_token
-
-* **Data Params**
-
-    None
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:**
-    `{ "time": "17:45",
-      "city": "Berlin" }`
+`{
+    "quote": "You can't always get what you want, but if you try sometimes, you might find, you get what you need.",
+    "author": "Mick Jagger",
+    "email": "nadya@gmail.com"
+}`
  
 * **Error Response:**
 

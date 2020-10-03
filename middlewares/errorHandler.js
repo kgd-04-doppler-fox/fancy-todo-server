@@ -1,4 +1,5 @@
 exports.errorHandler = (err, req, res, next) => {
+  console.log(err)
   if (err.name === 'SequelizeValidationError') {
     res.status(400).json({ msg: err.errors[0].message })
   } else if (err.name === 'SequelizeUniqueConstraintError') {

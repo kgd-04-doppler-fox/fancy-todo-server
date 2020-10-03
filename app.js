@@ -3,7 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const todoRoutes = require('./routes/todos.js')
 const userRoutes = require('./routes/users')
-const weatherRoutes = require('./routes/weather')
+const quoteRoutes = require('./routes/quote')
 const { errorHandler } = require('./middlewares/errorHandler.js')
 
 const port = process.env.PORT
@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/', userRoutes)
-app.use('/', weatherRoutes)
+app.use('/', quoteRoutes)
 app.use('/todos', todoRoutes)
 app.use(errorHandler)
 
