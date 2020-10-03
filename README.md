@@ -125,8 +125,7 @@ baseurl : 'http://localhost:3000'
    `id=[integer]`
 
 * **Data Params**
-
-  None
+`{ title ,description,due_date}`
 
 * **Success Response:**
 
@@ -170,7 +169,7 @@ baseurl : 'http://localhost:3000'
 
 * **Data Params**
 
-  None
+  `{ "status" : true }`
 
 * **Success Response:**
 
@@ -223,3 +222,73 @@ baseurl : 'http://localhost:3000'
 
   * **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "User doesn't exist" }`
+
+**Login**
+----
+  Login users account.
+
+* **URL**
+
+  /login
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `email=[string]`
+
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ access_token }`
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+    **Content:** `{name:unauthorized access}`
+
+  OR
+
+  * **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ message === "Wrong email/password" }`
+
+**Register**
+----
+  Register account user.
+
+* **URL**
+
+  /register
+
+* **Method:**
+
+  `POST`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `body`
+
+* **Data Params**
+
+  `email=[string]`
+  `password=[string]`
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{ id,email}`
+ 
+* **Error Response:**
+
+  * **Code:** 400 BAD REQUEST <br />
+    **Content:** `msg: "Email already use"`

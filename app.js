@@ -4,7 +4,8 @@ const cors = require ('cors');
 const app = express ();
 const port = process.env.PORT;
 const todoRoutes = require ('./router/todo_router');
-const userRoutes = require ('./router/user_router')
+const userRoutes = require ('./router/user_router');
+const thirdPartyRoutes = require ('./router/third-party-route');
 const errorHandler = require ('./middleware/errorHandler');
 
 app.use (express.urlencoded({ extended:false }));
@@ -13,6 +14,7 @@ app.use (cors());
 
 app.use ('/',userRoutes);
 app.use ('/todos',todoRoutes);
+app.use ('/thirdparty',thirdPartyRoutes)
 app.use (errorHandler);
 
 app.listen (port,() => {
