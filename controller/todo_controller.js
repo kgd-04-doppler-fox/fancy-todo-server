@@ -5,7 +5,8 @@ class ToDoController {
         ToDo.findAll ({
             where : {
                 userId : req.decodedUser.id
-            }
+            },
+            order: ['id']
         })
         .then (data => {
             res.status(200).json(data)
