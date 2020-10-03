@@ -2,6 +2,12 @@ const { User } = require(`../models/index`)
 const bcryptjs = require(`bcryptjs`)
 const jwt = require(`jsonwebtoken`)
 
+const {OAuth2Client} = require('google-auth-library');
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID
+const client = new OAuth2Client(CLIENT_ID);
+const { generateToken } = require('../helpers/jwt');
+const SECRET_PASSWORD = process.env.SECRET_PASSWORD
+
 
 class UserController {
     static async login(req, res, next) {
@@ -24,7 +30,7 @@ class UserController {
                     email: user.email,
                     id: user.id
                 }, process.env.JWT_SECRET)
-                
+
                 res.status(200).json({
                     access_token
                 })
@@ -48,13 +54,60 @@ class UserController {
                     password
                 }
             )
-            res.status(201).json({ id : user.id,
-            email : user.email })
+            res.status(201).json({
+                id: user.id,
+                email: user.email
+            })
         }
         catch (err) {
             next(err)
         }
     }
+
+
+    static googleSignIn(req, res, next) {
+        console.log(`End Point Sign`)
+        const id_token = req.headers.id_token
+        let email
+        client.verifyIdToken({
+            idToken: id_token,
+            audience: CLIENT_ID
+        })
+            .then(ticket => {
+                const payload = ticket.getPayload()
+                email = payload.email
+                // console.log(email)
+                return User.findOne({
+                    where: {
+                        email
+                    }
+                })
+
+            })
+            .then(user => {
+                console.log(user)
+                if (!user) {
+                    return User.create({
+                        email,
+                        password: SECRET_PASSWORD
+                    })
+                }
+                else {
+                    return user
+                }
+            })
+            .then(user => {
+                const payload = { id: user.id, email: user.email }
+                const jwtToken = generateToken(payload)
+                return res.status(200).json({
+                    token: jwtToken
+                })
+            })
+            .catch(err => [
+                next(err)
+            ])
+    }
+
 }
 
 module.exports = UserController
