@@ -7,7 +7,7 @@ class TodoController {
             title,
             description,
             status,
-            due_date : new Date (due_date),
+            due_date,
             UserId: req.decodedUser.id
         }).then(todo => {
             res.status(201).json({ todo })
@@ -48,7 +48,7 @@ class TodoController {
             title,
             description,
             status,
-            due_date : new Date (due_date)
+            due_date
         }, {
             where : { id : optionId},
             returning : true
