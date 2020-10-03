@@ -20,6 +20,7 @@ function authorization(req, res, next) {
             }
         })
         .catch(err => {
+            console.table(err)
             next(err)
         })
 

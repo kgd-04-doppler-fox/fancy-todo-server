@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isNow(date) {
           if (date.getTime() < new Date().getTime()) {
-            throw new Error(`Date can't today`)
+            throw new Error(`Can't input for today !`)
           }
         }
       }
