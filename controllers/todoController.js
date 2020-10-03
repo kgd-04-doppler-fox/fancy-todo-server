@@ -28,32 +28,29 @@ class TodoController {
                 "user-key": process.env.TOKEN_ZOMATO
             }
         })
-            // console.log(response.data.restaurants[0].restaurant.name);
-            // return response.data.restaurants[0].restaurant.name
-            // res.status(response.status).json(response.data[0].name)
-            // console.log(response.data[0].name);
-
     }
 
     static addTodo (req, res, next) {
         TodoController.searchSnack(req.body.Snack)
-            .then(response => {
+        .then(response => {
+            let randomSnack = Math.floor(Math.random() * response.data.restaurants.length)
+                console.log(response.data.restaurants);
                 return Todo.create({
                     title       : req.body.title,
                     description : req.body.description,
                     status      : req.body.status,
                     due_date    : req.body.due_date,
-                    Snack       : response.data.restaurants[0].restaurant.name,
+                    Snack       : response.data.restaurants[randomSnack].restaurant.name,
                     UserId      : req.decodedUser.id
                 })
             })
-            .then(data => {
-                // console.log(data);
-                res.status(201).json(data)
-            })
-            .catch(err => {
-                next(err)
-            })
+        .then(data => {
+            // console.log(data);
+            res.status(201).json(data)
+        })
+        .catch(err => {
+            next(err)
+        })
     }
 
     static findOne (req, res, next) {
@@ -73,33 +70,37 @@ class TodoController {
 
     static updateData (req, res, next) {
         let id = +req.params.id
-        let updatedData = {
-            title : req.body.title,
-            description : req.body.description,
-            status : req.body.status,
-            due_date : req.body.due_date,
-            UserId : req.decodedUser.id
-        }
-        Todo.update(updatedData, {
-            where : {
-                id : id
-            },
-            returning : true
-        })
+        TodoController.searchSnack(req.body.Snack)
+            .then(response => {
+                return Todo.update({
+                    title       : req.body.title,
+                    description : req.body.description,
+                    status      : req.body.status,
+                    Snack       : response.data.restaurants[0].restaurant.name,
+                    due_date    : req.body.due_date,
+                    UserId      : req.decodedUser.id
+                }, 
+                {
+                    where : {
+                        id : id
+                    }
+                },
+                )
+            })
         // console.log(updateData)
-        .then(data => {
-            // console.log(data)
-            if(data[0] === 1){
-                res.status(200).json(data[1][0])
-            } else {
-                throw {
-                    name : "not found"
+            .then(data => {
+                // console.log(data)
+                if(data[0] === 1){
+                    res.status(200).json(data[1][0])
+                } else {
+                    throw {
+                        name : "not found"
+                    }
                 }
-            }
-        })
-        .catch(err => {
-            next(err)
-        })
+            })
+            .catch(err => {
+                next(err)
+            })
     }
 
     static updateStatus (req, res, next) {

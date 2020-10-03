@@ -10,6 +10,7 @@ function searchSnack (snacks){
             }
         })
         .then(response => {
+            console.log(response);
             return response.data[0].name
             // res.status(response.status).json(response.data[0].name)
             // console.log(response.data[0].name);
