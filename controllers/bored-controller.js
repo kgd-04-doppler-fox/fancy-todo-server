@@ -19,8 +19,8 @@ class BoredController {
         })
       })
       .then(todo => {
-        console.log(todo)
-        res.status(201).json(todo)
+        // console.log(todo)
+        res.status(200).json(todo)
       })
 
       .catch(err => {

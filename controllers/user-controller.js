@@ -53,6 +53,52 @@ class UserController {
       next(err)
     }
   }
+
+  
+  // static googleSignIn(req, res, next) {
+  //   console.log(`end point google sign in`);
+  //   const id_token = req.headers.id_token
+  //   let email
+  //   // console.log(id_token);
+  //   client.verifyIdToken({
+  //     idToken: id_token,
+  //     audience: CLIENT_ID
+  //   })
+  //     .then(ticket => {
+  //       const payload = ticket.getPayload()
+  //       console.log(payload);
+  //       email = payload.email
+  //       return User.findOne({
+  //         where: {
+  //           email
+  //         }
+  //       })
+  //     })
+  //     .then(user => {
+  //       if (!user) {
+  //         return User.create({
+  //           email,
+  //           password: SECRET_PASSWORD
+  //         })
+  //       } else {
+  //         return user
+  //       }
+  //     })
+  //     .then(user => {
+  //       console.log(user);
+  //       const payload = { id: user.id, email: user.email }
+  //       const jwtToken = jwt.sign(payload, process.env.JWT_SECRET)
+  //       return res.status(200).json({
+  //         token: jwtToken
+  //       })
+  //     })
+  //     .catch(err => {
+  //       return res.status(500).json({
+  //         error: err,
+  //         message: "error"
+  //       })
+  //     })
+  // }
 }
 
 module.exports = UserController 
