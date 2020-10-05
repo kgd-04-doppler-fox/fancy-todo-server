@@ -4,7 +4,8 @@
     "password": "putra",
     "database": "fancy_js_todos",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorAliases": false
   },
   "production": {
     "use_env_variable" : "DATABASE_URL"
