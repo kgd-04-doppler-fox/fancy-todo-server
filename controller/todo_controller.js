@@ -1,7 +1,7 @@
 const { ToDo } = require ('../models')
 
 class ToDoController {
-    static getToDo (req,res) {
+    static getToDo (req,res,next) {
         ToDo.findAll ({
             where : {
                 userId : req.decodedUser.id
@@ -12,7 +12,7 @@ class ToDoController {
             res.status(200).json(data)
         })
         .catch (err => {
-            res.status(500).json(err)
+            next(err)
         })
     }
 
