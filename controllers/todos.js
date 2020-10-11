@@ -1,4 +1,4 @@
-const { Todo } = require ('../models')
+const { Todo, TodoUser, User } = require ('../models')
 const axios = require ('axios')
 
 class TodoController {
@@ -24,7 +24,13 @@ class TodoController {
             })
         })
         .then(todo => {
-            res.status(200).json(todo)
+            return TodoUser.create({
+                UserId: req.decodedUser.id,
+                TodoId: todo.id
+            })
+        })
+        .then(result => {
+            res.status(200).json(result)
         })
         .catch(err => {
             next(err)
@@ -32,22 +38,21 @@ class TodoController {
     }
 
     static findAll (req, res){
-        Todo
+        TodoUser
             .findAll({
                 where : {
                     UserId : req.decodedUser.id
-                }
+                },
+                include: ['Todo', 'User']
             })
             .then(todos => {
-                res.status(200).json({
-                    todos
-                })
+                res.status(200).json(todos)
             })
             .catch (err => {
                 res.send(err)
             })
     }
-
+    
     static findById (req, res, next) {
         const id = req.params.id
         Todo
@@ -64,7 +69,6 @@ class TodoController {
     }
 
     static editTodo (req, res, next) {
-        // console.log(req.params.id)
         console.log(req.body)
         const {title, description, status, due_date, location} = req.body
         const idParams = req.params.id
@@ -133,22 +137,18 @@ class TodoController {
     }
 
     static addMembers (req, res, next){
-        const userId = req.params.id
-        const todoId = null
-        Todo
-            .findByPk(id)
-            .then(todo => {
-                todoId = todo.id
-                return TodoUser.create({
-                    UserId,
-                    TodoId : todoId
-                })
+        const userId = req.body.userId
+        const todoId = req.body.todoId
+        TodoUser
+            .create({
+                UserId: userId,
+                TodoId: todoId
             })
-            .then (todo => {
-                res.status(200).json(todo)
+            .then(response => {
+                res.status(201).json(response)
             })
-            .catch(err => {
-                next(err)
+            .catch( err => {
+                next (err)
             })
     }
 }

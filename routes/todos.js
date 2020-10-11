@@ -5,7 +5,7 @@ const authorization = require ('../middleware/authorized')
 
 
 router.post('/', authentication, TodoController.createTodo)
-router.post('/addMembers/:id', authentication, authorization, TodoController.addMembers)
+router.post('/addMembers', authentication, TodoController.addMembers)
 router.get('/', authentication, TodoController.findAll)
 router.get('/:id', authentication, TodoController.findById)
 router.put('/:id', authentication, authorization, TodoController.editTodo)

@@ -1,4 +1,4 @@
-const {User} = require ('../models')
+const {Todo, TodoUser, User} = require ('../models')
 const bcryptjs = require ('bcryptjs')
 const jwt = require ('jsonwebtoken')
 const {generateToken} = require ('../helpers/helpers')
@@ -9,7 +9,6 @@ const client = new OAuth2Client(process.env.CLIENT_ID)
 
 class UserController {
     static register(req, res, next){
-        console.log(req.body)
         const { email, password, fullName } = req.body 
         User
             .create({
@@ -38,7 +37,6 @@ class UserController {
                 }
             })
             .then (user => {
-                console.log(user.password)
                 if (!user){
                     throw {
                         name: `wrong email/password`
@@ -100,11 +98,39 @@ class UserController {
     }
 
     static getUsers (req, res, next){
+        const todoId = req.query.todo
+        let usersData = null
         User
             .findAll()
             .then(users => {
-                console.log(users[0].fullName)
-                res.status(200).json(users)
+                usersData = users
+                return TodoUser.findAll({
+                    where: {
+                        TodoId: Number(todoId)
+                    }, 
+                    include: ['User', 'Todo']
+                })
+            })
+            .then(result => {
+                usersData.push(result)
+                res.status(200).json(usersData)
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
+
+    static userInProject(req, res, next){
+        console.log(`didieu`)
+        TodoUser
+            .findAll({
+                where: {
+                    TodoId: req.params.id
+                },
+                include: ['User']
+            })
+            .then(result => {
+                res.status(200).json(result)
             })
             .catch(err => {
                 next(err)
