@@ -91,7 +91,7 @@ class TodoController {
             })
     }
 
-    static changeStatusTodo (req, res) {
+    static changeStatusTodo (req, res, next) {
         const {status} = req.body
         const idParams = req.params.id
         Todo
@@ -116,7 +116,7 @@ class TodoController {
             })
     }
 
-    static deleteTodo (req, res) {
+    static deleteTodo (req, res, next) {
         const idParams = req.params.id
         Todo
             .destroy ({
@@ -129,6 +129,26 @@ class TodoController {
             })
             .catch (err => {
                 res.send(err)
+            })
+    }
+
+    static addMembers (req, res, next){
+        const userId = req.params.id
+        const todoId = null
+        Todo
+            .findByPk(id)
+            .then(todo => {
+                todoId = todo.id
+                return TodoUser.create({
+                    UserId,
+                    TodoId : todoId
+                })
+            })
+            .then (todo => {
+                res.status(200).json(todo)
+            })
+            .catch(err => {
+                next(err)
             })
     }
 }

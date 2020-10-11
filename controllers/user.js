@@ -98,6 +98,18 @@ class UserController {
             throw err
         })
     }
+
+    static getUsers (req, res, next){
+        User
+            .findAll()
+            .then(users => {
+                console.log(users[0].fullName)
+                res.status(200).json(users)
+            })
+            .catch(err => {
+                next(err)
+            })
+    }
 }
 
 

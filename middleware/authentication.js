@@ -24,7 +24,7 @@ function authentication (req, res, next){
                 }
             })
             .catch (err => {
-                nexr(err)
+                next(err)
             })
         }
 
