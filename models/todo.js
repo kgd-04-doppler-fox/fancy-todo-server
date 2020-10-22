@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.DATE,
       validate : {
         dueDate(value) {
-          if (new Date(value) > new Date()){
+          if (new Date(value) < new Date()){
             throw `Tanggal tidak boleh lewat hari ini`
           }
         }
