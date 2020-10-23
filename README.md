@@ -212,3 +212,58 @@ baseurl : http://localhost:3000/
     OR
 
     **Code:** 500 INTERNAL SERVER ERROR <br />
+
+
+
+**Register**
+----
+    Register
+
+* **URL**
+
+    /register
+
+* **Method:**
+
+    `POST`
+
+* **Success Response:**
+    {
+        "id": 17,
+        "email": "ndre@mail.com"
+    }
+
+* **Error Response:**
+     **Code:** 400 BAD REQUEST <br />
+    **Content:** `{"msg": "Validation isEmail on email failed"}`
+
+    OR
+
+    **Code:** 500 INTERNAL SERVER ERROR <br />
+
+
+
+**Login**
+----
+    Login
+
+* **URL**
+
+    /login
+
+* **Method:**
+
+    `POST`
+
+* **Success Response:**
+    {
+        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaXRAbWFpbC5jb20iLCJpZCI6MTQsImlhdCI6MTYwMzQxMTI0Mn0.WkIrUpNysGrFe4wEJ_v322VpAn4fk_pCvcUsVF6bfKQ"
+    }
+
+* **Error Response:**
+     **Code:** 400 BAD REQUEST <br />
+    **Content:** `{"msg": "Wrong Email / Password"}`
+
+    OR
+
+    **Code:** 500 INTERNAL SERVER ERROR <br />
