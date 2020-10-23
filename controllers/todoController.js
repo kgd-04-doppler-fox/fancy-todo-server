@@ -8,7 +8,8 @@ class TodoController {
         Todo.findAll({
             where : {
                 UserId : req.decodedUser.id
-            }
+            },
+            order:[['id', 'ASC']]
         })
         .then(data => {
             res.status(200).json(data)
@@ -33,7 +34,8 @@ class TodoController {
     static addTodo (req, res, next) {
         TodoController.searchSnack(req.body.Snack)
         .then(response => {
-            let randomSnack = Math.floor(Math.random() * response.data.restaurants.length)
+            if(response) {
+                let randomSnack = Math.floor(Math.random() * response.data.restaurants.length)
                 console.log(response.data.restaurants);
                 return Todo.create({
                     title       : req.body.title,
@@ -43,7 +45,12 @@ class TodoController {
                     Snack       : response.data.restaurants[randomSnack].restaurant.name,
                     UserId      : req.decodedUser.id
                 })
-            })
+            } else {
+                throw {
+                    name: "snack not found, please input another snack"
+                }
+            }     
+        })
         .then(data => {
             // console.log(data);
             res.status(201).json(data)

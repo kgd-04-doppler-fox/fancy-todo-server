@@ -3,7 +3,7 @@ const { User } = require('../models')
 
 function authentication (req, res, next) {
     const decoded = jwt.verify(req.headers.access_token, process.env.JWT_SECRET)
-    // console.log(decoded);
+    console.log(decoded);
 
     // pengecekan ke database, apakah usernya masih ada
     

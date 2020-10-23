@@ -5,24 +5,22 @@ const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const { verifyToken , generateToken } = require('../helper/jwt')
 
-
 class UserController {
-    static async register (req, res, next) {
+    static register (req, res, next) {
         const {email, password} = req.body
-        try {
-            const user = await User.create({
-                email,
-                password
-            })
+        console.log(req.body);
+        User.create({
+            email,
+            password
+        })
+        .then(user => {
             res.status(201).json({
-                id : user.id,
-                email : user.email
+                message : "registered successfully"
             })
-        } catch (error) {
-            next(error)
-        } {
-
-        }
+        })
+        .catch(err => {
+            next(err)
+        })
     }
 
     static async login (req, res, next) {
@@ -65,12 +63,14 @@ class UserController {
 
     static googleSign (req, res, next) {
         let email = null
+        // console.log(req.body.tokenGoogle, "<---- dari controller");
         client.verifyIdToken({
             idToken: req.body.tokenGoogle,
             audience: process.env.GOOGLE_CLIENT_ID, 
         })
         .then(ticket => {
             let payload = ticket.getPayload()
+            // console.log(payload, 'payload verified');
             email = payload.email
             
             return User.findOne({
@@ -84,10 +84,10 @@ class UserController {
             if(user){
                 return user // kalau didatabase udah ada usernya , yaudah yang direturn yang ada didatabase
             } else {
-                User.create({ // kalau belom ada, yaudah didaftarin dulu, tapi make password yang buat sendiri
+                return User.create({ // kalau belom ada, yaudah didaftarin dulu, tapi make password yang buat sendiri
                     // 
                     email,
-                    password: "passwordbikinsendiri"
+                    password: process.env.DEFAULT_PASSWORD
                 })
             }
         })
